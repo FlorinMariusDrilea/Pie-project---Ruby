@@ -1,0 +1,14 @@
+<table border = '1'>
+    <tr>
+        <th>User</th>
+        <th>OrderID</th>
+        <th>Price</th>
+    </tr>
+    <% @orders.each do |record| %>
+    <tr>
+        <td><%=h record[0]%></td>
+        <td><%=h record[1]%></td>
+        <td><%=h record[2].round(2)%></td>
+    </tr>
+    <% end %>
+</table>

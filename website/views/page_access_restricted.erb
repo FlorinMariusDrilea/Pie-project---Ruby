@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <TITLE>Login page</TITLE>
+    <link rel="stylesheet" type="text/css" href="style/table.css"/>
+  </head>
+  <body>
+      <%#Error message in case of being redirected from a page%>
+      <%if @access_restricted_account_edit%>
+      <p style = "color:red">You need to be a logged in customer to access the account editing page</p>
+      <%end%>
+      <%if @access_restricted_menu_admin%>
+      <p style = "color:red">You need to be a logged in menu admin to access the menu admin's pages</p>
+      <%end%>
+      <%if @access_restricted_account_admin%>
+      <p style = "color:red">You need to be a logged in account admin to access the account admin's pages</p>
+      <%end%>
+      <%if @access_restricted_twitter_admin%>
+      <p style = "color:red">You need to be a logged in twitter admin to access the twitter admin's pages</p>
+      <%end%>
+      <%if @access_restricted_order_admin%>
+      <p style = "color:red">You need to be a logged in order admin to access the order admin's pages</p>
+      <%end%>
+      <%if @access_restricted_marketing_admin%>
+      <p style = "color:red">You need to be a logged in marketing admin to access the marketing admin's pages</p>
+      <%end%>
+  
+      <form method= 'post' action= /login_form_handler>
+          <p>Twitter handle:</p>
+          @<input type = 'text' name = 'twitter_handle'>
+          <p>Password:</p>
+          <input type = 'password' name = 'password'> <br>
+      
+          <input type = 'submit' name = 'submit'>
+      </form>
+      <p>Don't have an account?</p>
+      <a href = '/register'>register</a>
+  </body>
+</html>

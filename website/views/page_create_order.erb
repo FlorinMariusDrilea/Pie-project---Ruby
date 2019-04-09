@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <title>Order submission form</title>
+        <link rel="stylesheet" type="text/css" href="/style/table.css"/>
+    </head>
+    <body>
+        <%= erb :button_cancel_order %>
+        <!-- form to get user inputs to add a new pie to an order -->
+        <div>
+            <form id = 'pie_inputs' method='post' action = "create_order" #order_form_left>
+                <!-- Input box -->
+                <p>User: <input type="text" name="user" value="<%=h params[:user] %>"/></p>
+                <!-- Invalid input warning -->
+                <% if @user_valid == false%>
+                    <p>Invalid user</p>
+                <% end %>
+                <p>Pie: <input type="integer" name="pie_type" value="<%=h params[:pie_type] %>"/></p>
+                <% if @pie_valid == false %>
+                    <p>Invalid pie</p>
+                <% end %>
+                <p>Quantity: <input type="integer" name="quantity" value="<%=h params[:quantity] %>"/></p>
+                <% if @quant_valid == false || @stock_valid == false %>
+                    <p>Invalid quantity</p>
+                <% end %>
+                <input type="submit" name="pie_submit" value="Enter" />
+            </form> 
+            <!-- Order completion button -->
+            <form id = "order_complete" method='post' action = "order_complete">
+                <input type="submit" name="complete_order" value="Complete order" />
+                <% if @order_valid == false %>
+                    <p>Invalid order</p>
+                <% end %>
+            </form>
+        
+            <table id="menu" #order_menu_right>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Catagory</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Stock</th>
+                </tr>
+                <% @menu.each do |record| %>             
+                
+               <tr>
+                    <td><%=h record[0] %></td> 
+                    <td><%=h record[1] %></td> 
+                    <td><%=h record[2] %></td>
+                    <td>£<%=h record[3] %></td>
+                    <td><%=h record[4] %></td>
+                    <td><%=h record[5] %></td>
+                </tr>
+                <% end %>                 
+            </table>
+           
+        </div>
+        <!-- Display table for pies -->
+        <table border = '1'>
+            <tr>
+                <!-- Column headings -->
+                <th>Twitterhandle</th>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>OrderID</th>
+                <th>Completion</th>
+            </tr>
+            <!-- Fills rows of data.-->
+            <% @pies.each do |record| %>
+                <tr>
+                    <td><%=h record[0]%></td>
+                    <td><% if record[4] == "Active" %>
+                            <form method="get">
+                                <input type="submit" name = "edit_item" value="<%=h record[1]%>"/>
+                            </form> 
+                        <%else%>
+                            <%=h record[1]%>
+                        <%end%>
+                    </td>
+                    <td><%=h record[2]%></td>
+                    <td><%=h record[3]%></td>
+                    <td><%=h record[4]%></td> 
+                </tr>
+            <% end %>
+        </table>
+        <!-- Order table -->
+        <table border = '1'>
+            <tr>
+                <th>Twitterhandle</th>
+                <th>OrderID</th>
+                <th>Price</th>
+            </tr>
+            <% @orders.each do |record| %>
+                <tr>
+                    <td><%=h record[0]%></td>
+                    <td><%=h record[1]%></td>
+                    <td>£<%=h record[2].round(2)%></td>
+                </tr>
+            <% end %>
+        </table>
+    </body>
+</html>

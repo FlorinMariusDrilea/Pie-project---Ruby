@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Competition Display</title>
+    <link rel="stylesheet" type="text/css" href="<%= url("/style/table.css")%>">
+    <link rel="stylesheet" type="text/css" href="<%= url("/style/menu.css")%>">
+</head>
+<body>
+    
+    <h1>Marketing Page</h1> 
+    
+    <%= erb :button_log_out %>   
+        <% unless @tweets.nil? %>
+        <% if @tweets.length == 0 %>
+            <p>No search results found!</p>
+        <% else %>
+        <%= erb :module_tweet_table %>    
+        <%= erb :button_next_tweet %>  
+        <%= erb :button_most_recent_tweet %>        
+        <% end %>
+    <% end %>
+        
+    
+    <%= erb :module_basic_tweet %>    
+   
+
+</body>
+</html>

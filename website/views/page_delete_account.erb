@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Delete Account</title>
+        <link rel="stylesheet" type="text/css" href="<%= url("/style/style.css")%>">
+        <link rel="stylesheet" type="text/css" href="<%= url("/style/table.css")%>">
+    </head>
+    <body>
+        
+        <h1>Delete Account</h1>
+        
+        <form id="UserDelete" method="post">
+            <input type="text" name="getuser" placeholder="Select User by Twitter Handle" value="<%=h params[:getuser] %>" required>
+            <br>
+            <input type="submit" value="Delete">
+        </form>
+        
+        <p><%=h @message %></p><br><br><br><br><br><br><br>
+        
+        <form id="BackToAccounts" class="button" action="/accounts" method="get">
+            <input type="submit" value="Back to Accounts"/>
+        </form>
+        
+    </body>
+</html>

@@ -1,0 +1,23 @@
+<table>
+            <tr>
+              <th>ID</th>
+              <th>User</th>
+              <th>Text</th>
+            </tr>
+            <% @filteredtweets.each do |tweet| %>
+                <tr>
+                  <td>
+                      
+                      <%= tweet.id %>
+                  </td>
+                  <td>
+                     <form method="get">
+                        <input type="submit" name ="User" value="<%= tweet.user.screen_name %>" />  
+                    </form> 
+                  </td>
+                  <td>
+                    <%= tweet.text %>
+                  </td>
+                </tr>
+            <% end %>
+        </table>

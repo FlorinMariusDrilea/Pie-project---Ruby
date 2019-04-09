@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Accounts Page</title>
+        <link rel="stylesheet" type="text/css" href="<%= url("/style/style.css")%>">
+        <link rel="stylesheet" type="text/css" href="<%= url("/style/table.css")%>">
+    </head>
+    <body>
+        <%= erb :button_log_out %>
+        <h1>Marketing Page</h1>
+        
+        <form id="competition_tweet" method="post">
+            <input type="text" name="hashtag" value="<%=h params[:hashtag] %>"
+                   placeholder="#competition_hashtag"><%=h @hashtag_message %>
+            <input type="text" name="start_date" value="<%=h params[:start_date] %>"
+                   placeholder="01/01/2018"><%=h @start_date_message %>
+            <input type="text" name="end_date" value="<%=h params[:end_date] %>"
+                   placeholder="02/01/2018"><%=h @end_date_message %>
+            <input type="text" name="tweet" value="<%=h params[:tweet] %>"
+                   placeholder="Main body of tweet...">
+            <input type="submit" name="comp_tweet" value="Submit Competition Tweet">
+        </form>  
+        <p><%=h @message %></p>
+        
+        <form id="picking_a_winner" method="get">
+            <input type="text" name="comp_name" value="<%=h params[:comp_name] %>"
+                   placeholder="The #name of the competition"><%=h @hashtag_message %>
+            <input type="submit" name="get_winner" value="Find a winner">
+        </form>  
+    </body>
+</html>

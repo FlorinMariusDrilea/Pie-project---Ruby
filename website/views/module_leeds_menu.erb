@@ -1,0 +1,20 @@
+<table id="leeds_menu">
+       <h2>LEEDS MENU:</h2>
+           <tr>
+               <th>ID</th>
+               <th>Name</th>
+               <th>Category</th>
+               <th>Price</th>
+               <th>Description</th>
+           </tr>
+           <% @leeds_results.each do |record| %>             
+                
+           <tr>
+              <td><%=h record[0] %></td> 
+              <td><%=h record[1] %></td> 
+              <td><%=h record[2] %></td>
+              <td>£<%=h record[3] %></td>
+              <td><%=h record[4] %></td>
+           </tr>
+     <% end %>                
+</table>

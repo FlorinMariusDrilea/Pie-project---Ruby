@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Order Manager</title>
+<link rel="stylesheet" href="style/table.css"/>
+</head>
+
+
+<body>
+<h1>Order Manager</h1>
+<%= erb :button_log_out %>
+
+<% unless @tweets.nil? %>
+    <% if @tweets.length == 0 %>
+        <p>No search results found!</p>
+    <% else %> 
+  <%= erb :button_order_search %>
+  <%= erb :button_display_all_tweets %>
+  <%= erb :module_tweet_table_user_button %>
+  <%= erb :button_next_tweet %>
+  <%= erb :button_most_recent_tweet %>
+    <% end %>
+<% end %>
+<%= erb :button_create_order %>
+<%= erb :module_basic_tweet %>
+<%= erb :module_order_display_table %>
+</body>
+</html>

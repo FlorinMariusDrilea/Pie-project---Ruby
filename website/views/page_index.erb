@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The Pied Piper</title>
+        <link rel="stylesheet" type="text/css" href="style/table.css"/>
+        <link rel="stylesheet" type="text/css" href="style/menu.css"/>
+        <link rel="stylesheet" type="text/css" href="style/index.css"/>
+    </head>
+    
+    <body background="cafe.jpg" >
+       
+    <div id = "homepagetopbar">
+        <%= erb :button_home %>
+        <%if session[:logged_in_customer].nil?%>
+        <form id="getmein" action="/login"  class="homebuttonright">
+            <input type="submit" value="Log in" />          
+            </form>
+        <%else%>
+        
+        <%= erb :button_log_out %>
+        <%end%>
+        
+         <form action="/register"  class="homebuttonright">
+            <input type="submit" value="Register" />          
+            </form>
+        <h1>The Pied Piper</h1>    
+        </div>
+   
+        <p class="homepagetext">Fancy a pie but don't want to leave the house? Or perhaps you're looking for food for an event you're hosting? Then you've come to the right place!
+           Sign up, link your Twitter handle and you will be able to order food to your location by simply Tweeting your order to our account.</p>
+        
+         <p class="homepagetext" style="font-weight: bold">WE HAVE RECENTLY OPENED A STORE IN LEEDS! Please note that the Leeds store has a different menu than the 
+           menu of our existing store in Sheffield. These can be seen below. If you'd like to only see the menu for your local store, please
+           log in or register above.</p>
+        
+         <p class="homepagetext" style="font-weight: bold">How to order online <br>  
+        1. Create an account using a valid twitter handle. <br>  
+        2. Tweet at our twitter account @ise2018team04. <br>  
+        3. Use the #order and let us know what you want. <br>  
+        4. Stay alert for our staff to confirm and check the order. <br>  
+        5. Relax and enjoy yourself while we work</p>
+
+        <div class="homepagetable">
+           <%= erb :module_shef_menu %>
+        </div>
+           <div class="homepagetable">
+            <%= erb :module_leeds_menu %>
+             </div>
+      
+    </body>
+    <footer class="homepagefooter">
+  <p >Contact us</p>
+         <p >Phone: 0121456765 <br>    Email:  piedpiper@gnail.co.org 
+        <br> Address: 12 Frodo Road, Sheffield <br> Postcode: S1 YFF</p>
+         <p >Created by J,J,A,R,A,F</p>
+  
+</footer>
+</html>

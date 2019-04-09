@@ -1,0 +1,23 @@
+<table id="shef_menu">
+       <h2>SHEFFIELD MENU:</h2>
+           <tr>
+               <th>ID</th>
+               <th>Name</th>
+               <th>Category</th>
+               <th>Price</th>
+               <th>Description</th>
+               <th>Stock</th>
+               
+           </tr>
+           <% @shef_results.each do |record| %>             
+                
+           <tr>
+              <td><%=h record[0] %></td> 
+              <td><%=h record[1] %></td> 
+              <td><%=h record[2] %></td>
+              <td>£<%=h record[3] %></td>
+              <td><%=h record[4] %></td>
+              <td><%=h record[5] %></td>
+           </tr>
+     <% end %>                
+</table>

@@ -1,0 +1,9 @@
+task :deploy do
+  sh "sudo gem install bundler"
+  sh "bundler install --quiet"
+  puts "Dynamically generating databases..."
+  ruby "databases.rb"
+  puts "DEPLOYING APP..."
+  ruby "app.rb"
+end
+

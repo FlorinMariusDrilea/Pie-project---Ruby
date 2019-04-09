@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <link rel="stylesheet" type="text/css" href="style/table.css"/>
+      <TITLE>Login page</TITLE>
+  </head>
+  <body>
+      <%= erb :button_log_out %>
+      <%= erb :button_home %>
+      
+      <%#Success messages%>
+      <%if @twitter_handle_ok && @unique_twitter_handle && @twitter_handle_format_ok && @twitter_handle_changed%>
+      <p style = "color: green">Changes made to the twitter handle</p>
+      <%end%>
+      <%if @password_all_ok && @password_changed%>
+      <p style = "color: green">Changes made to password</p>
+      <%end%>
+      <%if @email_address_ok && @email_address_format_ok && @email_address_changed%>
+      <p style = "color: green">Changes made to email address</p>
+      <%end%>
+      <%if @address_ok && @address_changed%>
+      <p style = "color: green">Changes made to address</p>
+      <%end%>
+      <%if @first_name_ok && @first_name_changed%>
+      <p style = "color: green">Changes made to the first name</p>
+      <%end%>
+      <%if @last_name_ok && @last_name_changed%>
+      <p style = "color: green">Changes made to the last name</p>
+      <%end%>
+      <%if @phone_number_all_ok && @phone_number_changed%>
+      <p style = "color: green">Changes made to the phone number</p>
+      <%end%>
+      <%if (@postcode_ok && @postcode_local_ok && @postcode_changed)%>
+      <p style = "color: green">Changes made to the postcode</p>
+      <%end%>      
+      <form method= 'post' action= '/edit_account_form_handler'>
+          
+          <%#Error messages regarding the twitter handle%>
+          <%if (!@unique_twitter_handle && @submitted == true && @twitter_handle_changed)%>
+              <p style= "color:red">That twitter handle is taken</p>
+          <%end%>
+          <%if (!@twitter_handle_format_ok && @submitted == true)%>
+              <p style= "color:red">That twitter handle is invalid.(It includes spaces or the word "admin")</p>
+          <%end%>
+                  
+          <p>Twitter handle: <%=@twitter_handle%></p>
+          <input type = 'text' name = 'twitter_handle' value = '<%= h @twitter_handle %>'>
+          
+          <%#Error messages regarding the password%>
+          <%if (!@password_match && @password_changed && @submitted == true )%>
+              <p style= "color:red">Passwords don't match</p>
+          <%end%>
+          <%if (!@password_count_ok && @password_changed && @password_ok && @submitted == true )%>
+              <p style= "color:red">Password too short(Needs to be 6 characters or longer)</p>
+          <%end%>
+          
+          <p>Password:</p>
+          <input type = 'password' name = 'password'> <br>
+          
+          <p>Confirm password:</p>
+          <input type = 'password' name = 'confirm_password'> <br>
+                 
+          <p>First name: <%=@first_name%></p>
+          <input type = 'text' name = 'first_name' value = '<%= h @first_name %>'>
+                 
+          <p>Last name: <%=@last_name%></p>
+          <input type = 'text' name = 'last_name' value = '<%= h @last_name%>'>
+          
+          <%#Error messages regarding the email adress%>
+          <%if (@email_address_ok && !@email_address_format_ok && @submitted == true)%>
+              <p style= "color:red">Invalid email adress format</p>
+          <%end%>
+          
+          <p>Email address: <%=@email_address%></p>
+          <input type = 'text' name = 'email_address' value = '<%= h @email_address %>'>
+          
+          <%#Error messages regarding the phone number%>
+          <%if (!@phone_number_is_number && @submitted == true)%>
+              <p style= "color:red">That's not a number</p>
+          <%end%>
+          <%if (!@phone_number_count_ok && @submitted == true)%>
+              <p style= "color:red">Invalid phone number (Number too short, has to be at least 11 characters)</p>
+          <%end%>
+          <p>Phone number: <%=@phone_number%></p>
+          <input type = 'text' name = 'phone_number' value = '<%= h @phone_number %>'> 
+          
+          <p>Address: <%=@address%></p> <br>
+          
+          <p>Address line 1:</p>
+          <input type = 'text' name = 'address_line1' value = '<%= h @address_line1 %>'> 
+          
+          <p>Address line 2:</p>
+          <input type = 'text' name = 'address_line2' value = '<%= h @address_line2 %>'>
+          
+          <%#Error messages regarding the postcode%>
+          <%if (@postcode_ok && !@postcode_local_ok && @submitted == true)%>
+              <p style= "color:red">We don't deliver to that address(invalid postcode).</p>
+          <%end%>
+          <p>Postcode: <%=@postcode%></p>
+          <input type = 'text' name = 'postcode' value = '<%= h @postcode %>'> <br>
+          
+          <input type = 'submit' name = 'submit'> <br>
+          
+      </form><br><br>
+      
+      <% if (@anyvouchers > '0') %>
+          <h2>My Vouchers</h2>
+          <% @vouchers.each do |d| %>
+              <li><%=h d[1] %></li>
+          <% end %>
+      <% end %><br>
+      
+      <a href = '/logout'>Log out</a>
+      
+  </body>
+</html>

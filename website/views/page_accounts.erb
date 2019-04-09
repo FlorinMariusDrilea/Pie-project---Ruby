@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Accounts Page</title>
+        <link rel="stylesheet" type="text/css" href="<%= url("/style/style.css")%>">
+        <link rel="stylesheet" type="text/css" href="<%= url("/style/table.css")%>">
+    </head>
+    <body>
+        <%= erb :button_log_out %>
+        <h1>Accounts</h1>
+        
+        <% if @anyupdates > '0' %>
+            <h2>Voucher Updates</h2>
+            <ul>
+            <% @updates.each do |d| %>
+                <li><%=h d[0] %>: <%=h d[1] %></li>
+            <% end %>
+            </ul>
+        <% end %><br>
+        
+        <form id="AddOffer" class="button" action="/add_offer" method="get">
+            <input type="submit" name="Add Offer" value="Add Offer"/>
+        </form>
+        <form id="EditAccount" class="button" action="/edit_user_account" method="get">
+            <input type="submit" value="Edit Account"/>
+        </form>
+        <form id="DeleteAccount" class="button" action="/delete_account" method="get">
+            <input type="submit" value="Delete Account"/>
+        </form><br><br><br><br><br><br>
+        
+        <form id="SearchUsers" method="get">
+            <input type="text" name="search" placeholder="Find User by Twitter Handle" value="<%=h params[:search] %>">
+            <input type="submit" value="Search">
+        </form><br><br><br><br><br>
+        
+        <table>
+            <tr>
+                <th>Twitter</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>E-mail address</th>
+                <th>Password</th>
+                <th>Total Orders</th>
+            </tr>
+            <% @accounts.each do |d| %>
+            <tr>
+                <td>
+                    <form method="get">
+                        <input type="submit" name="user" value="<%= d[3] %>" />
+                    </form>
+                </td>
+                <td><%=h d[0] %> <%=h d[1] %></td>
+                <td><%=h d[2] %>, <%=h d[8] %></td>
+                <td>(+44) <%=h d[4] %></td>
+                <td><%=h d[5] %></td>
+                <td><%=h d[6] %></td>
+                <td><%=h d[7] %></td>
+            </tr>
+            <% end %>
+        </table>
+    </body>
+</html>

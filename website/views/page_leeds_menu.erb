@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+      <title>Menu Edit Tool</title>
+      <link rel="stylesheet" type="text/css" href="<%= url("/style/table.css")%>">
+        <link rel="stylesheet" type="text/css" href="<%= url("/style/menu.css")%>">
+    </head>
+    
+    <body>
+       <%= erb :button_home %> 
+       <%= erb :button_log_out %> 
+        
+        
+       
+        <h1>Menu Edit Tool</h1>   
+    
+        <% if session[:location] == "sheffield" %>
+            <%= erb :module_shef_admin_menu %>             
+        <% end %>
+        
+        <% if session[:location] == "leeds" %>
+           <%= erb :module_leeds_admin_menu %> 
+        <% end %>
+        
+        <h2>Add an Item to Menu</h2>
+        
+        <div id="add">
+            <% if @submitted_add && @name_valid && @unique %>
+            <p style="color: green">Item added successfully!</p>
+        
+        <% else %>
+
+            <% if @submitted_add && !@stock_is_integer %> 
+                <p style="color: red">Invalid stock - you must enter an integer.</p>
+            <% end %>
+            
+            <% if @submitted_add && !@name_valid %> 
+                <p style="color: red">Invalid item name. Please try again.</p>
+            <% end %>
+        
+            <% if @submitted_add && !@id_exists %> 
+                <p style="color: red">An item with that ID already exists. Please use a unique ID.</p>
+            <% end %>
+        
+            <% if @submitted_add && !@price_valid %> 
+                <p style="color: red">Error: invalid price. Only characters 0-9 and a decimal place are permitted.</p>
+            <% end %>
+        
+            <% if @submitted_add && !@id_is_integer %> 
+                <p style="color: red">Error: invalid ID. Only integers are permitted.</p>
+            <% end %>    
+            
+            
+    
+        
+            <form method="post" action="leeds_add">
+                
+               <% if @submitted_add && !@name_valid %>
+                   <p style="red">An item with this name already exists. Please use a unique name.</p>
+               <% end %>
+                
+                
+               <p>Item name:
+                    <input type="text" name="name" value="<%=h @name if @submitted_add %>"/>
+               </p>
+                
+               <p>Item price:
+                    <input type="text" name="price" value="<%=h @price if @submitted_add %>"/>
+               </p>
+                
+               <p>Item category (Food, Drink, Snack):
+                  <input type="text" name="category" value="<%=h @category if @submitted_add %>"/>
+               </p>        
+                
+               <p>Item description:
+                    <input type="text" name="description" value="<%=h @description if @submitted_add %>"/>
+               </p>
+                
+               <p>OPTIONAL: STOCK. Leave blank to automatically enter default value (50):
+                    <input type="text" name="stock" value="<%=h @stock if @submitted_add %>"/>
+               </p>
+                
+               <p style="strong">OPTIONAL: ITEM ID. Leave blank to automatically generate an ID.
+                    <input type="text" name="id" value="<%=h @id if @submitted_add %>"/>
+               </p>
+                
+               <input type="submit" value="Submit" />                
+            </form>
+        </div>
+        
+        <% end %>
+        
+        <div id="remove">
+            <h2>Remove an Item from Menu</h2>
+
+            <% if @submitted_remove && @id_valid%>
+                <p style="color: green">Item removed successfully!</p>
+
+            <% else %>
+                <% if @submitted_remove && !@id_not_empty %> 
+                    <p style="color: red">Error: You must enter an ID before submitting.</p>
+                <% end %>
+
+                <% if @submitted_remove && !@id_is_integer %> 
+                    <p style="color: red">The ID must be an integer. Only characters 0-9 are permitted.</p>
+                <% end %>
+
+                <% if @submitted_remove && !@id_exists %> 
+                    <p style="color: red">Error: An item with that ID doesn't exist.</p>
+                <% end %>
+
+                <form method="post" action="leeds_remove">
+
+
+                   <p>Enter the item's ID:
+                        <input type="text" name="id" value="<%=h @id if @submitted_remove %>"/>
+                   </p>
+
+
+                   <input type="submit" value="Submit" />                
+                </form>
+
+            <% end %>   
+        </div>
+                
+        
+        
+        
+    </body>
+</html>

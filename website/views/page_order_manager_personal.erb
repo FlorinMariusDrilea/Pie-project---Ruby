@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Order Manager</title>
+<link rel="stylesheet" href="/style/table.css"/>
+</head>
+
+
+<body>
+<h1><%= @user %></h1>
+<%= erb :button_log_out %>
+
+<% unless @tweets.nil? %>
+    <% if @tweets.length == 0 %>
+        <p>No search results found!</p>
+    <% else %> 
+  <%= erb :button_order_search %>
+  <%= erb :button_display_all_tweets %>
+  <%= erb :module_tweet_table %>
+  <%= erb :button_next_tweet %>
+  <%= erb :button_most_recent_tweet %>
+    <% end %>
+<% end %>
+<%= erb :button_create_order %>
+<%= erb :module_basic_tweet %>
+<%= erb :module_order_display_table %>
+    
+          <h2>Vouchers</h2>
+          <% @vouchers.each do |d| %>
+              <li><%=h d[1] %></li>
+          <% end %>
+    
+     <form id="Add Offer" method="get" >
+    <input type="text" name = "offer_name" value="" placeholder="Write offer name here" />
+    <input type="text" name = "orderid" value="" placeholder="Write OrderID here" />
+    <input type="submit" name = "apply_offer" value="Apply offer" />
+</form>
+    
+</body>
+</html>

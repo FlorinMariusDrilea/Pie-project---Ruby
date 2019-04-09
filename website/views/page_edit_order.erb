@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>Edit order details</title>
+        <link rel="stylesheet" type="text/css" href="/style/table.css"/>
+    </head>
+    <body>
+        <%= erb :button_cancel_order %>
+            <form id = 'pie_inputs' method='get' #order_form_left>
+                <p>Pie: <input type="integer" name="edit_pie_type" value="<%=h params[:edit_pie_type] %>"/></p>
+                <p>Quantity: <input type="integer" name="edit_pie_quantity" value="<%=h params[:edit_pie_quantity] %>"/></p>
+                <input type="submit" name="pie_edit" value="Edit values" />
+            </form> 
+            <!-- Display table for pies -->
+            <table border = '1'>
+                <tr>
+                    <!-- Column headings -->
+                    <th>Twitterhandle</th>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>OrderID</th>
+                    <th>Completion</th>
+                </tr>
+                <!-- Fills rows of data.-->
+                <% if @pies != nil %>
+                    <% @pies.each do |record| %>
+                        <tr>
+                            <td><%=h record[0]%></td>
+                            <td><%=h record[1]%></td>
+                            <td><%=h record[2]%></td>
+                            <td><%=h record[3]%></td>
+                            <td><%=h record[4]%></td> 
+                        </tr>
+                    <% end %>
+                <% end %>
+            </table>
+        
+            <table id="menu" #order_menu_right>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Catagory</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Stock</th>
+                </tr>
+                <% @menu.each do |record| %>             
+                
+               <tr>
+                    <td><%=h record[0] %></td> 
+                    <td><%=h record[1] %></td> 
+                    <td><%=h record[2] %></td>
+                    <td>£<%=h record[3] %></td>
+                    <td><%=h record[4] %></td>
+                    <td><%=h record[5] %></td>
+                </tr>
+                <% end %>                
+            </table>
+    </body>
+</html>

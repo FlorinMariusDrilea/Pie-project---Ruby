@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add Offer</title>
+        <link rel="stylesheet" type="text/css" href="<%= url("/style/style.css")%>">
+        <link rel="stylesheet" type="text/css" href="<%= url("/style/table.css")%>">
+    </head>
+    <body>
+        
+        <h1>Add Offer</h1>
+        
+        <form id="UserAdd" method="post">
+            <input type="text" name="getuser" placeholder="Select User by Twitter Handle" value="<%=h params[:getuser] %>" required>
+            <br>
+            <input id="10_percent" type="radio" name="offertype" value="10% off" required>
+            <label for="10_percent">10% off</label>
+            <br>
+            <input id="20_percent" type="radio" name="offertype" value="20% off" required>
+            <label for="20_percent">20% off</label>
+            <br>
+            <input id="30_percent" type="radio" name="offertype" value="30% off" required>
+            <label for="30_percent">30% off</label>
+            <br>
+            <input id="40_percent" type="radio" name="offertype" value="40% off" required>
+            <label for="40_percent">40% off</label>
+            <br>
+            <input id="50_percent" type="radio" name="offertype" value="50% off" required>
+            <label for="50_percent">50% off</label>
+            <br>
+            <input id="60_percent" type="radio" name="offertype" value="60% off" required>
+            <label for="60_percent">60% off</label>
+            <br>
+            <input id="70_percent" type="radio" name="offertype" value="70% off" required>
+            <label for="70_percent">70% off</label>
+            <br>
+            <p><%=h @message %></p>
+            <input type="submit" value="Apply">
+        </form><br><br><br><br><br><br><br>
+        
+        <form id="BackToAccounts" class="button" action="/accounts" method="get">
+            <input type="submit" value="Back to Accounts"/>
+        </form>
+        
+    </body>
+</html>

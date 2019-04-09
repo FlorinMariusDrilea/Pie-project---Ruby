@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style/table.css"/>
+    <TITLE>Register page</TITLE>
+  </head>
+  <body>
+      <%= erb :button_home %>
+      <%#General error message%>
+      <%if (!@all_ok && @submitted == true)%>
+          <p style= "color:red">Something went wrong!</p>
+      <%end%>
+      <%#Success message#%>
+      <%if (@all_ok && @submitted == true)%>
+          <p style= "color:green">You have succesfully registered!</p>
+      <%end%>
+      
+      
+      <form method= 'post' action= '/register_form_handler'>
+          
+          <%#Error messages regarding the twitter handle%>
+          <%if (!@twitter_handle_ok && @submitted == true)%>
+              <p style= "color:red">Invalid twitter handle</p>
+          <%end%>
+          <%if (@twitter_handle_ok && !@twitter_handle_format_ok && @submitted == true)%>
+              <p style= "color:red">Invalid twitter handle format (Contains the word admin or a space)</p>
+          <%end%>
+          <%if (!@unique_twitter_handle && @submitted == true)%>
+              <p style= "color:red">That username is taken</p>
+          <%end%>
+                   
+          <p>Twitter handle:</p>
+          <input type = 'text' name = 'twitter_handle' value = '<%= h params[:twitter_handle]%>'>
+          
+          <%#Error messages regarding the password%>
+          <%if (!@password_ok && @submitted == true)%>
+              <p style= "color:red">Invalid password</p>
+          <%end%>
+          <%if (!@password_match && @submitted == true)%>
+              <p style= "color:red">Passwords don't match</p>
+          <%end%>
+          <%if (!@password_count_ok && @submitted == true)%>
+              <p style= "color:red">Password too short(Needs to be 6 characters or longer)</p>
+          <%end%>
+          
+          <p>Password:</p>
+          <input type = 'password' name = 'password' value = '<%= h params[:password]%>'>
+          
+          <p>Confirm password:</p>
+          <input type = 'password' name = 'confirm_password' value = '<%= h params[:confirm_password]%>'>
+          
+          <%#Error messages regarding the first name%>
+          <%if (!@first_name_ok && @submitted == true)%>
+              <p style= "color:red">Invalid first name</p>
+          <%end%>
+          
+          <p>First name:</p>
+          <input type = 'text' name = 'first_name' value = '<%= h params[:first_name]%>'>
+          
+          <%#Error messages regarding the last_name%>
+          <%if (!@last_name_ok && @submitted == true)%>
+              <p style= "color:red">Invalid last name</p>
+          <%end%>
+          <p>Last name:</p>
+          <input type = 'text' name = 'last_name' value = '<%= h params[:last_name]%>'>
+          
+          <%#Error messages regarding the email address%>
+          <%if (!@email_address_ok && @submitted == true)%>
+              <p style= "color:red">Invalid email address</p>
+          <%end%>
+          
+          <p>Email address:</p>
+          <input type = 'text' name = 'email_address' value = '<%= h params[:email_address]%>'>
+          
+          <%#Error messages regarding the phone number%>
+          <%if (!@phone_number_ok && @submitted == true)%>
+              <p style= "color:red">Invalid phone number</p>
+          <%end%>
+          <%if (!@phone_number_is_number && @submitted == true)%>
+              <p style= "color:red">That is not a number</p>
+          <%end%>
+          <%if (!@phone_count_ok && @submitted == true)%>
+              <p style= "color:red">Invalid phone number (Number too short, has to be at least 11 characters)</p>
+          <%end%>
+          
+          <p>Phone number</p>
+          <input type = 'text' name = 'phone_number' value = '<%= h params[:phone_number]%>'>
+          
+          <%#Error messages regarding the address_line1%>
+          <%if (!@address_line1_ok && @submitted == true)%>
+              <p style= "color:red">Invalid address line 1</p>
+          <%end%>
+          <p>Address line 1:</p>
+          <input type = 'text' name = 'address_line1' value = '<%= h params[:address_line1]%>'> 
+          <%#Error messages regarding the address_line2%>
+          <%if (!@address_line2_ok && @submitted == true)%>
+              <p style= "color:red">Invalid address line 2</p>
+          <%end%>
+          <p>Address line 2:</p>
+          <input type = 'text' name = 'address_line2' value = '<%= h params[:address_line2]%>'> 
+          <%#Error messages regarding the postcode%>
+          <%if (!@postcode_ok && @submitted == true)%>
+              <p style= "color:red">Invalid postcode</p>
+          <%end%>
+          <%if (@postcode_ok && !@postcode_local_ok && @submitted == true)%>
+              <p style= "color:red">We don't deliver to that address(invalid postcode).</p>
+          <%end%>
+          <p>Postcode:</p>
+          <input type = 'text' name = 'postcode' value = '<%= h params[:postcode]%>'> <br>
+          
+          <input type = 'submit' name = 'submit'> 
+          
+          
+          
+      </form>
+      <p>Already have an account?</p>
+      <a href = '/login'>Log in</a>
+      
+  </body>
+</html>
